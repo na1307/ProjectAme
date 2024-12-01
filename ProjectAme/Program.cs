@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace ProjectAme;
@@ -11,17 +10,10 @@ public static class Program {
     // yet and stuff might break.
     [STAThread]
     public static void Main(string[] args) {
-        ServiceCollection sc = new();
-
-        sc.AddLogging(builder => builder.AddDebug().SetMinimumLevel(LogLevel.Information));
-        var sp = sc.BuildServiceProvider();
-
-        Ioc.Default.ConfigureServices(sp);
-
         try {
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         } catch (Exception e) {
-            sp.GetRequiredService<ILoggerFactory>().CreateLogger("ProjectAme").LogError(e, "An error occured.");
+            Ioc.Default.GetRequiredService<ILoggerFactory>().CreateLogger("ProjectAme").LogError(e, "An error occured.");
         }
     }
 

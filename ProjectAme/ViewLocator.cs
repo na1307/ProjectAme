@@ -6,7 +6,7 @@ namespace ProjectAme;
 
 public sealed class ViewLocator : IDataTemplate {
     public Control? Build(object? param) {
-        if (param is null) {
+        if (param is not ViewModelBase) {
             return null;
         }
 

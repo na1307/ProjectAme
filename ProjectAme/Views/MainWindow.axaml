@@ -7,7 +7,7 @@
         x:Class="ProjectAme.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ProjectAme">
+        Title="{Binding FilePath}">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -36,9 +36,9 @@
                 Command="{Binding DeleteFilesCommand}">
             Delete File(s)
         </Button>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Width="500" Height="500" VerticalAlignment="Top"
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Width="600" Height="400" VerticalAlignment="Top"
                   CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All"
-                  AutoGenerateColumns="True">
+                  AutoGenerateColumns="True" ItemsSource="{Binding Files}">
 
         </DataGrid>
     </Grid>

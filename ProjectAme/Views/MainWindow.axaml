@@ -7,7 +7,7 @@
         x:Class="ProjectAme.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="{Binding FilePath}">
+        Title="{Binding Archive}">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -39,7 +39,8 @@
         <DataGrid x:Name="FilesTable" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                   Width="600" Height="400" VerticalAlignment="Top"
                   CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All"
-                  AutoGenerateColumns="True" ItemsSource="{Binding Files}" DoubleTapped="FilesTable_OnDoubleTapped">
+                  AutoGenerateColumns="True" ItemsSource="{Binding Archive.Entries}"
+                  DoubleTapped="FilesTable_OnDoubleTapped">
 
         </DataGrid>
     </Grid>

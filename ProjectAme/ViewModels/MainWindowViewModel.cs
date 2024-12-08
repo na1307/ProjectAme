@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using ProjectAme.Models;
 using ProjectAme.Services;
 using SharpCompress.Archives;
 using System.Diagnostics;
-using File = ProjectAme.Models.File;
 
 namespace ProjectAme.ViewModels;
 
@@ -12,10 +12,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
     private static readonly string cache = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.cache/";
 
     [ObservableProperty]
-    private string? filePath;
-
-    [ObservableProperty]
-    private IReadOnlyList<File>? files;
+    private Archive? archive;
 
     [RelayCommand]
     private async Task Open() {
@@ -31,8 +28,8 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
         });
 
         if (seleted.Count >= 1) {
-            FilePath = seleted[0].Path.LocalPath;
-            Files = [.. ArchiveFactory.Open(FilePath).Entries.Select(e => new File(e.Key!, e))];
+            Archive?.Dispose();
+            Archive = new(seleted[0].Path.LocalPath);
         }
     }
 
@@ -50,14 +47,14 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
 
     [RelayCommand]
     private void OpenFile(int index) {
-        var file = Files![index];
+        var file = Archive!.Entries[index];
 
-        file.Entry.WriteToDirectory(cache, new() {
+        file.WriteToDirectory(cache, new() {
             ExtractFullPath = false,
             Overwrite = true
         });
 
-        Process.Start(new ProcessStartInfo(cache + Path.GetFileName(file.Entry.Key)) {
+        Process.Start(new ProcessStartInfo(cache + Path.GetFileName(file.Key)) {
             UseShellExecute = true
         });
     }

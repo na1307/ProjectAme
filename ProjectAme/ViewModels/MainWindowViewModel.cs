@@ -2,17 +2,20 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using ProjectAme.Services;
-using SharpCompress.Readers;
+using SharpCompress.Archives;
+using System.Diagnostics;
 using File = ProjectAme.Models.File;
 
 namespace ProjectAme.ViewModels;
 
 public sealed partial class MainWindowViewModel : ViewModelBase {
+    private static readonly string cache = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.cache/";
+
     [ObservableProperty]
     private string? filePath;
 
     [ObservableProperty]
-    private IReadOnlyCollection<File>? files;
+    private IReadOnlyList<File>? files;
 
     [RelayCommand]
     private async Task Open() {
@@ -20,24 +23,17 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
             AllowMultiple = false,
             FileTypeFilter = [
                 new("ZIP Files") {
-                    Patterns = ["*.zip"]
+                    Patterns = ["*.zip"],
+                    MimeTypes = ["application/zip"]
                 }
             ],
             Title = "Open File"
         });
 
-        FilePath = seleted[0].Path.LocalPath;
-
-        await using var stream = await seleted[0].OpenReadAsync();
-        using var reader = ReaderFactory.Open(stream);
-
-        List<File> tmpfiles = [];
-
-        while (reader.MoveToNextEntry()) {
-            tmpfiles.Add(new(reader.Entry.Key!));
+        if (seleted.Count >= 1) {
+            FilePath = seleted[0].Path.LocalPath;
+            Files = [.. ArchiveFactory.Open(FilePath).Entries.Select(e => new File(e.Key!, e))];
         }
-
-        Files = [.. tmpfiles];
     }
 
     [RelayCommand]
@@ -51,4 +47,18 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
 
     [RelayCommand]
     private void DeleteFiles() => throw new NotImplementedException();
+
+    [RelayCommand]
+    private void OpenFile(int index) {
+        var file = Files![index];
+
+        file.Entry.WriteToDirectory(cache, new() {
+            ExtractFullPath = false,
+            Overwrite = true
+        });
+
+        Process.Start(new ProcessStartInfo(cache + Path.GetFileName(file.Entry.Key)) {
+            UseShellExecute = true
+        });
+    }
 }

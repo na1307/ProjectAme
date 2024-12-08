@@ -36,9 +36,10 @@
                 Command="{Binding DeleteFilesCommand}">
             Delete File(s)
         </Button>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Width="600" Height="400" VerticalAlignment="Top"
+        <DataGrid x:Name="FilesTable" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
+                  Width="600" Height="400" VerticalAlignment="Top"
                   CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All"
-                  AutoGenerateColumns="True" ItemsSource="{Binding Files}">
+                  AutoGenerateColumns="True" ItemsSource="{Binding Files}" DoubleTapped="FilesTable_OnDoubleTapped">
 
         </DataGrid>
     </Grid>

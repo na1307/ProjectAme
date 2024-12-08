@@ -38,10 +38,15 @@
         </Button>
         <DataGrid x:Name="FilesTable" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                   Width="600" Height="400" VerticalAlignment="Top"
-                  CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All"
-                  AutoGenerateColumns="True" ItemsSource="{Binding Archive.Entries}"
-                  DoubleTapped="FilesTable_OnDoubleTapped">
-
+                  CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All" IsReadOnly="True"
+                  ItemsSource="{Binding Archive.Entries, Mode=OneWay}" DoubleTapped="FilesTable_OnDoubleTapped">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="File Name" Binding="{Binding Key}" />
+                <DataGridTextColumn Header="Original Size" Binding="{Binding  Size}" />
+                <DataGridTextColumn Header="Compressed Size" Binding="{Binding  CompressedSize}" />
+                <DataGridTextColumn Header="Created Time" Binding="{Binding  CreatedTime}" />
+                <DataGridTextColumn Header="Modified Time" Binding="{Binding  LastModifiedTime}" />
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 

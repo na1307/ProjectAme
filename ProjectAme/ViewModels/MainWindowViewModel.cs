@@ -47,18 +47,18 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
 
     [RelayCommand]
     private void OpenFile(int index) {
-        var file = Archive!.Entries[index];
+        var entry = Archive!.Entries[index];
 
-        if (file.IsDirectory) {
+        if (entry.IsDirectory) {
             return;
         }
 
-        file.WriteToDirectory(cache, new() {
+        entry.WriteToDirectory(cache, new() {
             ExtractFullPath = false,
             Overwrite = true
         });
 
-        Process.Start(new ProcessStartInfo(cache + Path.GetFileName(file.Key)) {
+        Process.Start(new ProcessStartInfo(cache + Path.GetFileName(entry.Key)) {
             UseShellExecute = true
         });
     }

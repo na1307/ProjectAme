@@ -22,6 +22,12 @@
         </Button>
         <Button Grid.Row="0" Grid.Column="2" Width="130" Height="30"
                 Command="{Binding ExtractCommand}">
+            <Button.CommandParameter>
+                <MultiBinding>
+                    <Binding RelativeSource="{RelativeSource AncestorType=Window}" />
+                    <Binding Path="SelectedItems" ElementName="FilesTable" />
+                </MultiBinding>
+            </Button.CommandParameter>
             Extract
         </Button>
         <Button Grid.Row="0" Grid.Column="3" Width="130" Height="30"

@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ProjectAme.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="800" Height="450"
+        x:Class="ProjectAme.Views.ExtractWindow"
+        x:DataType="vm:ExtractWindowViewModel"
+        Title="ExtractWindow">
+
+    <Design.DataContext>
+        <vm:ExtractWindowViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <DataGrid x:Name="FilesTable"
+                  Width="600" Height="400" VerticalAlignment="Top"
+                  CanUserResizeColumns="True" CanUserReorderColumns="True" GridLinesVisibility="All" IsReadOnly="True"
+                  ItemsSource="{Binding Entries, Mode=OneWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="File Name" Binding="{Binding Key}" />
+                <DataGridTextColumn Header="Original Size" Binding="{Binding  Size}" />
+                <DataGridTextColumn Header="Compressed Size" Binding="{Binding  CompressedSize}" />
+                <DataGridTextColumn Header="Created Time" Binding="{Binding  CreatedTime}" />
+                <DataGridTextColumn Header="Modified Time" Binding="{Binding  LastModifiedTime}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

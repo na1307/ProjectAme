@@ -12,6 +12,11 @@ using ProjectAme.Views;
 namespace ProjectAme;
 
 public sealed partial class App : Application {
+    public static new App Current => (App)Application.Current!;
+
+    public static void Log(LogLevel logLevel, string message, object?[] args) =>
+        Ioc.Default.GetRequiredService<ILoggerFactory>().CreateLogger("ProjectAme").Log(logLevel, message, args);
+
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted() {

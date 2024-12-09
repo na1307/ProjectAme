@@ -49,6 +49,10 @@ public sealed partial class MainWindowViewModel : ViewModelBase {
     private void OpenFile(int index) {
         var file = Archive!.Entries[index];
 
+        if (file.IsDirectory) {
+            return;
+        }
+
         file.WriteToDirectory(cache, new() {
             ExtractFullPath = false,
             Overwrite = true

@@ -68,14 +68,13 @@
       },
       "Bluehill.Imports": {
         "type": "Direct",
-        "requested": "[1.0.8, )",
-        "resolved": "1.0.8",
-        "contentHash": "XXpaWibao1/kTRUBTpJjfxvqBWCcEeXPZqWkgclbYzxpV0wAsBSddrlaI2LTzQyLvD6n9bXcGQJ92of8MLEdjQ==",
+        "requested": "[1.0.11, )",
+        "resolved": "1.0.11",
+        "contentHash": "fh54FR1Ax9eC87diV3EDtptWeIvQittYEzoleVx69jPHvgpVngHh6nMPxuubiCc8SFW5bdpg1zzOHQue2Gg0kg==",
         "dependencies": {
-          "Bluehill.Analyzers": "1.1.0",
+          "Bluehill.Analyzers": "1.4.0",
           "Roslynator.Analyzers": "4.12.10",
-          "Roslynator.Formatting.Analyzers": "4.12.10",
-          "SonarAnalyzer.CSharp": "10.4.0.108396"
+          "Roslynator.Formatting.Analyzers": "4.12.10"
         }
       },
       "CommunityToolkit.Mvvm": {
@@ -208,8 +207,8 @@
       },
       "Bluehill.Analyzers": {
         "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "fO4oXhbdbZ8AMgDc6OXPDSztBojYRC3cbIeq8O/Zdw8IyufVQH6l3i6Ba6WcUQuVL3kn/eMV01L0OITeEI4ArQ=="
+        "resolved": "1.4.0",
+        "contentHash": "uo+9s0ex8bP1QmdPiQKgliiznkbteqM+XWBGFDexNsOaDEQ+YT9GhGCn5qvfr2c5xLscop6kgPBZGSROeG3Xcw=="
       },
       "HarfBuzzSharp": {
         "type": "Transitive",
@@ -316,11 +315,6 @@
         "type": "Transitive",
         "resolved": "2.88.9",
         "contentHash": "wb2kYgU7iy84nQLYZwMeJXixvK++GoIuECjU4ECaUKNuflyRlJKyiRhN1MAHswvlvzuvkrjRWlK0Za6+kYQK7w=="
-      },
-      "SonarAnalyzer.CSharp": {
-        "type": "Transitive",
-        "resolved": "10.4.0.108396",
-        "contentHash": "xGcLZ+dvkVuBbd3sjPur9X+1owSL/iDoxVFJLhMx3/vq1fmoKM2fwvrZ8ReAas6l715GJ/dWU2ckwlrRVopmbg=="
       },
       "System.IO.Pipelines": {
         "type": "Transitive",

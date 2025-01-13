@@ -18,6 +18,6 @@
     <PackageVersion Include="SharpCompress" Version="0.38.0" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="Bluehill.Imports" Version="1.0.8" />
+    <GlobalPackageReference Include="Bluehill.Imports" Version="1.0.11" />
   </ItemGroup>
 </Project>
